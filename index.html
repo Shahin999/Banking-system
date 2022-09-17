@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- login area -->
     <div id="login-area">
       <h1 class="text-center">Well come to seba Bank</h1>
       <div class="submit-area">
@@ -27,52 +28,102 @@
         <button id="login" class="btn btn-success">Login</button>
       </div>
     </div>
+    <!-- transection area -->
     <div id="transaction-area">
       <div class="row">
         <div class="col-md-4">
           <div class="diposit status">
             <h5>diposit</h5>
-            <h2>$00</h2>
+            <h2>$<span id="currentDeposit">00</span></h2>
           </div>
         </div>
         <div class="col-md-4">
           <div class="withdraw status">
             <h5>withdraw</h5>
-            <h2>$00</h2>
+            <h2>$ <span id="currentWithdraw">00</span></h2>
           </div>
         </div>
         <div class="col-md-4">
           <div class="balance status">
             <h5>balance</h5>
-            <h2>1000</h2>
+            <h2>$ <span id="currentBalance">  00</span></h2>
           </div>
         </div>
       </div>
 
-      <div class="row submit ">
-        <div class="col-md-6 ">
-         <div class="status1">
+      <div class="row submit">
+        <div class="col-md-6">
+          <div class="status1">
             <h4>Diposit</h4>
-            <input type="text" class="form-control" placeholder="$ Amount you want diposit" /><br>
-            <button class="btn btn-success">Diposit</button>
-         </div>
+            <input
+              id="depositAmount"
+              type="text"
+              class="form-control"
+              placeholder="$ Amount you want diposit"
+            /><br />
+            <button id="addDeposit" class="btn btn-success">Diposit</button>
+          </div>
         </div>
-        <div class="col-md-6 ">
-         <div class="status1">
+        <div class="col-md-6">
+          <div class="status1">
             <h4>Withdraw</h4>
-            <input type="text"  class="form-control" placeholder="$ Amount you want withdraw" /><br>
-            <button class="btn btn-success">Withdraw</button>
-         </div>
+            <input
+              id="withdrawAmount"
+              type="text"
+              class="form-control"
+              placeholder="$ Amount you want withdraw"
+            /><br />
+            <button id="addWithdraw" class="btn btn-success">Withdraw</button>
+          </div>
         </div>
       </div>
     </div>
     <script>
+      // Loginbutton hendelar section
+
       const loginBtn = document.getElementById("login");
       loginBtn.addEventListener("click", function () {
         const loginArea = document.getElementById("login-area");
         loginArea.style.display = "none";
         const transactionArea = document.getElementById("transaction-area");
         transactionArea.style.display = "block";
+      });
+      // depositButton hendelar section
+      const depositBtn = document.getElementById("addDeposit");
+      depositBtn.addEventListener("click", function () {
+        const depositAmount = document.getElementById("depositAmount").value;
+        const depositNumber = parseFloat(depositAmount);
+        const currentDeposit =
+          document.getElementById("currentDeposit").innerText;
+        const currentDepositNumber = parseFloat(currentDeposit);
+        const totalDeposit = depositNumber + currentDepositNumber;
+        document.getElementById("currentDeposit").innerText = totalDeposit;
+        document.getElementById("depositAmount").value = "";
+
+        const currentBalance =
+          document.getElementById("currentBalance").innerText;
+        const currentBalanceNumber = parseFloat(currentBalance);
+        const totalBalance = totalDeposit + currentBalanceNumber;
+        document.getElementById("currentBalance").innerText = totalBalance;
+      });
+
+      const WithdrawBtn = document.getElementById("addWithdraw");
+      WithdrawBtn.addEventListener("click", function () {
+        const withdrawAmount = document.getElementById("withdrawAmount").value;
+        const withdrawAmountNumber = parseFloat(withdrawAmount);
+        const currentWithdraw =
+        document.getElementById("currentWithdraw").innerText;
+
+        const currentWithdrawNumber = parseFloat(currentWithdraw);
+        const totalWithdraw = withdrawAmountNumber + currentWithdrawNumber;
+        document.getElementById("currentWithdraw").innerText = totalWithdraw;
+        document.getElementById("withdrawAmount").value = "";
+
+        const currentBalance= document.getElementById("currentBalance").innerText;
+        const Balance = parseFloat(currentBalance) - withdrawAmountNumber ;
+        document.getElementById("currentBalance").innerText = Balance;
+
+         
       });
     </script>
   </body>
