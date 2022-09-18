@@ -53,7 +53,7 @@
 
       <div class="row submit">
         <div class="col-md-6">
-          <div class="status1">
+          <div class="status1 deposit">
             <h4>Diposit</h4>
             <input
               id="depositAmount"
@@ -64,7 +64,7 @@
             <button id="addDeposit" class="btn btn-success">Diposit</button>
           </div>
         </div>
-        <div class="col-md-6">
+        <div id="withdraw1" class="col-md-6 ">
           <div class="status1">
             <h4>Withdraw</h4>
             <input
@@ -103,8 +103,18 @@
         const currentBalance =
           document.getElementById("currentBalance").innerText;
         const currentBalanceNumber = parseFloat(currentBalance);
-        const totalBalance = totalDeposit + currentBalanceNumber;
+        const totalBalance = depositNumber + currentBalanceNumber;
         document.getElementById("currentBalance").innerText = totalBalance;
+
+        
+        if(Balance<=0){
+          const withdraw =document.getElementById("withdraw1");
+          withdraw.style.display="none";
+         }else{
+          const withdraw =document.getElementById("withdraw1");
+          withdraw.style.display="block";
+         }
+         
       });
 
       const WithdrawBtn = document.getElementById("addWithdraw");
@@ -123,6 +133,15 @@
         const Balance = parseFloat(currentBalance) - withdrawAmountNumber ;
         document.getElementById("currentBalance").innerText = Balance;
 
+         if(Balance<=0){
+          const withdraw =document.getElementById("withdraw1");
+          withdraw.style.display="none";
+         }else{
+          const withdraw =document.getElementById("withdraw1");
+          withdraw.style.display="block";
+
+         }
+          
          
       });
     </script>
